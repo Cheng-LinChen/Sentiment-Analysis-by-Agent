@@ -33,8 +33,8 @@ try:
             # 將 datetime 轉換為可讀格式
             df['datetime'] = pd.to_datetime(df['datetime'], unit='s')
 
-            # 儲存成 CSV
-            df.to_csv("finnhub_bit_news_recent.csv", index=False, encoding="utf-8-sig")
+            # 儲存成 CSV (注意路徑)
+            df.to_csv(r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/data collection/finnhub_bit_news_recent.csv", index=False, encoding="utf-8-sig")
 
             print(f"Success! Saved {len(bit_news)} BIT related news from the past 7 days.")
         else:
