@@ -1,6 +1,13 @@
 import finnhub
 import pandas as pd
 from datetime import datetime, timedelta
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from config import SOURCE_DIR
+
 
 # 初始化 Finnhub 客戶端
 api_key = "cv418thr01ql2euu1ahgcv418thr01ql2euu1ai0"  # 你的 API 金鑰
@@ -34,7 +41,7 @@ try:
             df['datetime'] = pd.to_datetime(df['datetime'], unit='s')
 
             # 儲存成 CSV (注意路徑)
-            df.to_csv(r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/data collection/finnhub_bit_news_recent.csv", index=False, encoding="utf-8-sig")
+            df.to_csv(SOURCE_DIR + r"/finnhub_bit_news_recent.csv", index=False, encoding="utf-8-sig")
 
             print(f"Success! Saved {len(bit_news)} BIT related news from the past 7 days.")
         else:

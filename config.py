@@ -1,6 +1,7 @@
 
 user = 0 # 0: X+0, 1: Anderson
 
+
 if user == 0:
     BIT_NEWS_DIR = "/Users/chencheng-lin/Desktop/Sentiment-Analysis-by-Agent/data collection/BIT.py"
     SOURCE_DIR = "/Users/chencheng-lin/Desktop/Sentiment-Analysis-by-Agent/sentiment analysis/source"
