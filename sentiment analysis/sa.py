@@ -7,6 +7,14 @@ from datetime import datetime
 import ast  # Import ast for safe evaluation
 import re
 
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from config import SOURCE_DIR, REPORT_DIR
+
+
+
 client = OpenAI(
     api_key="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"
 )
@@ -113,18 +121,19 @@ def query_openai(text, key_word):
     )
 
     try:
+        print("p0")
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": prompt},
             ],
         )
+        print("p1")
         sentiment_text = response.choices[0].message.content.strip()
         sentiment_data = sentiment_text
 
         return sentiment_data
     except Exception as e:
-        print(sentiment_text)
         print(f"OpenAI API error: {e}")
         return []
 
@@ -166,12 +175,13 @@ def analyze_sentiment(data, key_word):
 
     # Split the combined text into smaller chunks (max_tokens = 10000 for OpenAI model)
     text_chunks = split_text_into_chunks(combined_text, max_tokens=10000)
-
+    print("split")
     sentiment_scores = []
     primary_summaries = []  # List to store primary summaries
     cnt = 1
     for chunk in text_chunks:
         sentiment_data = query_openai(chunk, key_word)
+        print("openai")
         if sentiment_data:
             # Extract the first four numbers as sentiment scores and the rest as summary
             factors, summary = parse_sentiment_response(sentiment_data)
@@ -209,8 +219,8 @@ def analyze_sentiment(data, key_word):
 
 def main():
     key_word = "Bitcoin"
-    source_folder = "./source"
-    report_folder = "./report"
+    source_folder = SOURCE_DIR
+    report_folder = REPORT_DIR
     os.makedirs(report_folder, exist_ok=True)
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     report_path = os.path.join(

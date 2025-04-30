@@ -3,7 +3,7 @@ import shutil
 import os
 import sys
 
-from config import BIT_NEWS_DIR, SOURCE_DIR, REPORT_DIR, SA_DIR, user
+from config import BIT_NEWS_DIR, SA_DIR, user
 
 def run_bit_news_collection():
     print("Running BIT news collection...")
@@ -15,12 +15,10 @@ def run_bit_news_collection():
 
 
 def run_sentiment_analysis():
-    print("Running sentiment analysis...")
     if(user == 0):
-        subprocess.run([sys.executable, BIT_NEWS_DIR], check=True)
+        subprocess.run([sys.executable, SA_DIR], check=True)
     else:
         subprocess.run(["python", SA_DIR], check=True)
-    print("Sentiment analysis complete.")
 
 if __name__ == "__main__":
     run_bit_news_collection()
