@@ -2,14 +2,16 @@ import subprocess
 import shutil
 import os
 
+from config import BIT_NEWS_DIR, SOURCE_DIR, REPORT_DIR, SA_DIR
+
 def run_bit_news_collection():
     print("Running BIT news collection...")
-    subprocess.run(["python", r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/data collection/BIT.py"], check=True)
+    subprocess.run(["python", BIT_NEWS_DIR], check=True)
     print("BIT news collection complete.")
 
 def prepare_sa_input():
-    source_file = r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/data collection/finnhub_bit_news_recent.csv"
-    target_folder = r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/sentiment analysis/source"
+    source_file = SOURCE_DIR
+    target_folder = REPORT_DIR
     os.makedirs(target_folder, exist_ok=True)
     target_file = os.path.join(target_folder, os.path.basename(source_file))
     shutil.copy(source_file, target_file)
@@ -17,7 +19,7 @@ def prepare_sa_input():
 
 def run_sentiment_analysis():
     print("Running sentiment analysis...")
-    subprocess.run(["python", r"C:/Users/User/Desktop/專題/Sentiment-Analysis-by-Agent/sentiment analysis/sa.py"], check=True)
+    subprocess.run(["python", SA_DIR], check=True)
     print("Sentiment analysis complete.")
 
 if __name__ == "__main__":
